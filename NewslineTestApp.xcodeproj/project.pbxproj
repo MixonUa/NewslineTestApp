@@ -16,6 +16,10 @@
 		9333689F2AB459C300AFC0C9 /* DetailedInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333689E2AB459C300AFC0C9 /* DetailedInformationViewController.swift */; };
 		933368A52AB4628E00AFC0C9 /* NewsFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368A32AB4628E00AFC0C9 /* NewsFeedTableViewCell.swift */; };
 		933368A62AB4628E00AFC0C9 /* NewsFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933368A42AB4628E00AFC0C9 /* NewsFeedTableViewCell.xib */; };
+		933368AB2AB4757B00AFC0C9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368AA2AB4757B00AFC0C9 /* NetworkManager.swift */; };
+		933368AE2AB4766F00AFC0C9 /* NetworkFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368AD2AB4766F00AFC0C9 /* NetworkFetchService.swift */; };
+		933368B22AB4770200AFC0C9 /* NewsFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368B12AB4770200AFC0C9 /* NewsFeedModel.swift */; };
+		933368BA2AB4790800AFC0C9 /* DetailedNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368B92AB4790800AFC0C9 /* DetailedNewsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		9333689E2AB459C300AFC0C9 /* DetailedInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInformationViewController.swift; sourceTree = "<group>"; };
 		933368A32AB4628E00AFC0C9 /* NewsFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedTableViewCell.swift; sourceTree = "<group>"; };
 		933368A42AB4628E00AFC0C9 /* NewsFeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsFeedTableViewCell.xib; sourceTree = "<group>"; };
+		933368AA2AB4757B00AFC0C9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		933368AD2AB4766F00AFC0C9 /* NetworkFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetchService.swift; sourceTree = "<group>"; };
+		933368B12AB4770200AFC0C9 /* NewsFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedModel.swift; sourceTree = "<group>"; };
+		933368B92AB4790800AFC0C9 /* DetailedNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNewsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +95,9 @@
 		933368982AB4595B00AFC0C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				933368B02AB476F500AFC0C9 /* DataModels */,
+				933368AA2AB4757B00AFC0C9 /* NetworkManager.swift */,
+				933368AD2AB4766F00AFC0C9 /* NetworkFetchService.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -106,6 +117,15 @@
 				933368A42AB4628E00AFC0C9 /* NewsFeedTableViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		933368B02AB476F500AFC0C9 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				933368B12AB4770200AFC0C9 /* NewsFeedModel.swift */,
+				933368B92AB4790800AFC0C9 /* DetailedNewsModel.swift */,
+			);
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,11 +199,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933368B22AB4770200AFC0C9 /* NewsFeedModel.swift in Sources */,
+				933368AB2AB4757B00AFC0C9 /* NetworkManager.swift in Sources */,
+				933368BA2AB4790800AFC0C9 /* DetailedNewsModel.swift in Sources */,
 				933368832AB4568600AFC0C9 /* AppDelegate.swift in Sources */,
 				933368852AB4568600AFC0C9 /* SceneDelegate.swift in Sources */,
 				9333689C2AB459AE00AFC0C9 /* NewslineViewController.swift in Sources */,
 				933368A52AB4628E00AFC0C9 /* NewsFeedTableViewCell.swift in Sources */,
 				9333689F2AB459C300AFC0C9 /* DetailedInformationViewController.swift in Sources */,
+				933368AE2AB4766F00AFC0C9 /* NetworkFetchService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

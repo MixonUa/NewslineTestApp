@@ -10,6 +10,10 @@ import UIKit
 class NewslineViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     
+    let downloadManager = NetworkFetchService()
+    
+    var newsFeed: NewsFeedModel? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "News"
@@ -18,23 +22,27 @@ class NewslineViewController: UIViewController {
         
         newsFeedTableView.dataSource = self
         newsFeedTableView.delegate = self
-        // Do any additional setup after loading the view.
+
+        downloadManager.requestAllNews { (data, error) in
+            if let data = data {
+                self.newsFeed = data
+                self.newsFeedTableView.reloadData()
+            }
+        }
     }
-
-
 }
 
 // MARK: TableView DataSource and Delegate
+
 extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return newsFeed?.posts.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedTableViewCell") as! NewsFeedTableViewCell
-        cell.updateCell(title: "Title", information: "Info", likes: 132, days: 23)
+        guard let array = newsFeed?.posts else { return cell }
+            cell.updateCell(title: array[indexPath.row].title, information: array[indexPath.row].preview_text, likes: array[indexPath.row].likes_count, days: array[indexPath.row].timeshamp)
         return cell
     }
-    
-    
 }
