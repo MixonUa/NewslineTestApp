@@ -8,22 +8,31 @@
 import UIKit
 
 class DetailedInformationViewController: UIViewController {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    
+    var detailedNews: DetailedNewsModel? = nil
+    var image: Data = Data()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fillInformation()
+        setImage()
+    }
 
-        // Do any additional setup after loading the view.
+    private func fillInformation() {
+        guard let item = detailedNews else { return }
+        titleLabel.text = item.post.title
+        textLabel.text = item.post.text
+        likesLabel.text = "\u{2764} \(item.post.likes_count)"
+        dateLabel.text = String(item.post.timeshamp)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setImage() {
+        imageView.image = UIImage(data: image)
     }
-    */
-
 }

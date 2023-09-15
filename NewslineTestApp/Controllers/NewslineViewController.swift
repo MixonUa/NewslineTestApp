@@ -11,6 +11,7 @@ class NewslineViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     
     let downloadManager = NetworkFetchService()
+    let networkManager = NetworkManager()
     
     var newsFeed: NewsFeedModel? = nil
     
@@ -44,5 +45,20 @@ extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
         guard let array = newsFeed?.posts else { return cell }
             cell.updateCell(title: array[indexPath.row].title, information: array[indexPath.row].preview_text, likes: array[indexPath.row].likes_count, days: array[indexPath.row].timeshamp)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let newsId = newsFeed?.posts[indexPath.row].postId else { return }
+        guard let nextVC = storyboard?.instantiateViewController(identifier: "DetailedInformationViewController") as? DetailedInformationViewController else { return }
+        downloadManager.requestDetailedNew(id: newsId) { (data, error) in
+            guard let downloadedData = data else { return }
+            nextVC.detailedNews = data
+            self.networkManager.requestData(urlString: downloadedData.post.postImage) { (imageData, error) in
+                if let data = imageData {
+                    nextVC.image = data
+                }
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
     }
 }
