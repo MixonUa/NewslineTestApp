@@ -31,7 +31,7 @@ class NetworkFetchService {
         }
     }
     
-    func requestDetailedNew(by id: Int, completion: @escaping (DetailedNewsModel?, Error?) -> Void) {
+    func requestDetailedNew(id: Int, completion: @escaping (DetailedNewsModel?, Error?) -> Void) {
         let newsURL = "https://raw.githubusercontent.com/anton-natife/jsons/master/api/posts/\(id).json"
         networkDataProvider.requestData(urlString: newsURL) { (data, error) in
             guard let data = data else { return }

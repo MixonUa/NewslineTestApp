@@ -11,6 +11,7 @@ class NewslineViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     
     let downloadManager = NetworkFetchService()
+    let networkManager = NetworkManager()
     
     var newsFeed: NewsFeedModel? = nil
     
@@ -32,6 +33,20 @@ class NewslineViewController: UIViewController {
     }
 }
 
+extension Double {
+    func daysAgo() -> Int {
+        let calendar = Calendar.current
+        let today = Date()
+        let postDate = NSDate(timeIntervalSince1970: self)
+
+        let date1 = calendar.startOfDay(for: today)
+        let date2 = calendar.startOfDay(for: postDate as Date)
+
+        let components = calendar.dateComponents([.day], from: date2, to: date1)
+        return components.day!
+    }
+}
+
 // MARK: TableView DataSource and Delegate
 
 extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
@@ -42,7 +57,25 @@ extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedTableViewCell") as! NewsFeedTableViewCell
         guard let array = newsFeed?.posts else { return cell }
-            cell.updateCell(title: array[indexPath.row].title, information: array[indexPath.row].preview_text, likes: array[indexPath.row].likes_count, days: array[indexPath.row].timeshamp)
+        cell.updateCell(title: array[indexPath.row].title,
+                        information: array[indexPath.row].preview_text,
+                        likes: array[indexPath.row].likes_count,
+                        days: array[indexPath.row].timeshamp.daysAgo())
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let newsId = newsFeed?.posts[indexPath.row].postId else { return }
+        guard let nextVC = storyboard?.instantiateViewController(identifier: "DetailedInformationViewController") as? DetailedInformationViewController else { return }
+        downloadManager.requestDetailedNew(id: newsId) { (data, error) in
+            guard let downloadedData = data else { return }
+            nextVC.detailedNews = data
+            self.networkManager.requestData(urlString: downloadedData.post.postImage) { (imageData, error) in
+                if let data = imageData {
+                    nextVC.image = data
+                }
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
     }
 }

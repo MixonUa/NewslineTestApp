@@ -14,7 +14,7 @@ struct NewsFeedModel: Codable {
 
 struct Posts: Codable {
     var postId: Int
-    var timeshamp: Int
+    var timeshamp: Double
     var title: String
     var preview_text: String
     var likes_count: Int
