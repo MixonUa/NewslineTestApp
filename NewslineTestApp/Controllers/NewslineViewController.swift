@@ -33,6 +33,20 @@ class NewslineViewController: UIViewController {
     }
 }
 
+extension Double {
+    func daysAgo() -> Int {
+        let calendar = Calendar.current
+        let today = Date()
+        let postDate = NSDate(timeIntervalSince1970: self)
+
+        let date1 = calendar.startOfDay(for: today)
+        let date2 = calendar.startOfDay(for: postDate as Date)
+
+        let components = calendar.dateComponents([.day], from: date2, to: date1)
+        return components.day!
+    }
+}
+
 // MARK: TableView DataSource and Delegate
 
 extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
@@ -43,7 +57,10 @@ extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedTableViewCell") as! NewsFeedTableViewCell
         guard let array = newsFeed?.posts else { return cell }
-            cell.updateCell(title: array[indexPath.row].title, information: array[indexPath.row].preview_text, likes: array[indexPath.row].likes_count, days: array[indexPath.row].timeshamp)
+        cell.updateCell(title: array[indexPath.row].title,
+                        information: array[indexPath.row].preview_text,
+                        likes: array[indexPath.row].likes_count,
+                        days: array[indexPath.row].timeshamp.daysAgo())
         return cell
     }
     

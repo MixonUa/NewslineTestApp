@@ -29,7 +29,7 @@ class DetailedInformationViewController: UIViewController {
         titleLabel.text = item.post.title
         textLabel.text = item.post.text
         likesLabel.text = "\u{2764} \(item.post.likes_count)"
-        dateLabel.text = String(item.post.timeshamp)
+        dateLabel.text = "\(item.post.timeshamp.daysAgo()) days ago"
     }
     
     private func setImage() {

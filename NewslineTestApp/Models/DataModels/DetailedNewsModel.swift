@@ -13,7 +13,7 @@ struct DetailedNewsModel: Codable {
 
 struct Post: Codable {
     var postId: Int
-    var timeshamp: Int
+    var timeshamp: Double
     var title: String
     var text: String
     var postImage: String
