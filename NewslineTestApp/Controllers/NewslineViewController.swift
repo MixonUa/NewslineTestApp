@@ -10,13 +10,15 @@ import UIKit
 class NewslineViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     
-    let downloadManager = NetworkFetchService()
-    let networkManager = NetworkManager()
+    private let downloadManager = NetworkFetchService()
+    private let networkManager = NetworkManager()
     
-    var newsFeed: NewsFeedModel? = nil
+    private var newsFeed: NewsFeedModel? = nil
+    private var topMenu = UIMenu()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupAll()
         self.title = "News"
     
         newsFeedTableView.register(UINib(nibName: "NewsFeedTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsFeedTableViewCell")
@@ -44,6 +46,35 @@ extension Double {
 
         let components = calendar.dateComponents([.day], from: date2, to: date1)
         return components.day!
+    }
+}
+
+// MARK: Settings
+
+extension NewslineViewController {
+    
+    private func setupTopMenu() {
+        let byDate = UIAction(title: "sort by date") { _ in
+            self.newsFeed?.posts.sort(by: {$0.timeshamp > $1.timeshamp})
+            self.newsFeedTableView.reloadData()
+        }
+        let byLikes = UIAction(title: "sort by likes") { _ in
+            self.newsFeed?.posts.sort(by: {$0.likes_count > $1.likes_count})
+            self.newsFeedTableView.reloadData()
+        }
+        
+        topMenu = UIMenu(children: [byDate, byLikes])
+    }
+    
+    private func setupNavigationBar() {
+        let barButtonRight = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down.on.square"), menu: topMenu)
+        barButtonRight.tintColor = .black
+        navigationItem.rightBarButtonItem = barButtonRight
+    }
+    
+    private func setupAll() {
+        setupTopMenu()
+        setupNavigationBar()
     }
 }
 
