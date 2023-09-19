@@ -14,22 +14,37 @@ class DetailedInformationViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    var detailedNews: DetailedNewsModel? = nil
+    struct DetailedNewsViewModel {
+        var timeshamp: Double
+        var title: String
+        var text: String
+        var likes: Int
+
+    }
+
+    var detailedNews = [DetailedNewsViewModel]()
     var image: Data = Data()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "News"
         
         fillInformation()
         setImage()
     }
+    
+    public func setupViewModels(_ post: Post)  {
+        detailedNews.append(DetailedNewsViewModel(timeshamp: post.timeshamp,
+                                                title: post.title,
+                                                text: post.text,
+                                                likes: post.likes_count))
+    }
 
     private func fillInformation() {
-        guard let item = detailedNews else { return }
-        titleLabel.text = item.post.title
-        textLabel.text = item.post.text
-        likesLabel.text = "\u{2764} \(item.post.likes_count)"
-        dateLabel.text = "\(item.post.timeshamp.daysAgo()) days ago"
+        titleLabel.text = detailedNews[0].title
+        textLabel.text = detailedNews[0].text
+        likesLabel.text = "\u{2764} \(detailedNews[0].likes)"
+        dateLabel.text = "\(detailedNews[0].timeshamp.daysAgo()) days ago"
     }
     
     private func setImage() {
