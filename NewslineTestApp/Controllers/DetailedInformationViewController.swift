@@ -27,7 +27,7 @@ class DetailedInformationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "News"
+        self.title = "Post"
         
         fillInformation()
         setImage()
@@ -44,7 +44,7 @@ class DetailedInformationViewController: UIViewController {
         titleLabel.text = detailedNews[0].title
         textLabel.text = detailedNews[0].text
         likesLabel.text = "\u{2764} \(detailedNews[0].likes)"
-        dateLabel.text = "\(detailedNews[0].timeshamp.daysAgo()) days ago"
+        dateLabel.text = "\(detailedNews[0].timeshamp.daysAgo()) day ago"
     }
     
     private func setImage() {
