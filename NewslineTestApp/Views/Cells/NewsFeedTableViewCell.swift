@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum ButtonState {
-    case expand
-    case collapse
-}
-
 class NewsFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var informationLabel: UILabel!
@@ -20,7 +15,6 @@ class NewsFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var textModifyButton: UIButton!
     
     private var model: PostCellViewModel?
-    private var currentState = ButtonState.expand
     
     override func awakeFromNib() {
         super.awakeFromNib()
