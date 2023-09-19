@@ -8,7 +8,7 @@
 import UIKit
 
 struct PostCellViewModel {
-    let post: Posts
+    let posts: Posts
     var collapsed: Bool
     let buttonHandler: (Posts) -> Void
 }
@@ -48,8 +48,8 @@ class NewslineViewController: UIViewController {
     
     private func setupViewModels(_ posts: [Posts]) -> [PostCellViewModel] {
         posts.map { post in
-            PostCellViewModel(post: post, collapsed: true, buttonHandler: { post in
-                if let index = self.cellModel.firstIndex(where: { $0.post.postId == post.postId }) {
+            PostCellViewModel(posts: post, collapsed: true, buttonHandler: { post in
+                if let index = self.cellModel.firstIndex(where: { $0.posts.postId == post.postId }) {
                     var model = self.cellModel[index]
                     let current = model.collapsed
                     model.collapsed = !current
@@ -82,11 +82,11 @@ extension NewslineViewController {
     
     private func setupTopMenu() {
         let byDate = UIAction(title: "sort by date") { _ in
-            self.cellModel.sort(by: {$0.post.timeshamp > $1.post.timeshamp})
+            self.cellModel.sort(by: {$0.posts.timeshamp > $1.posts.timeshamp})
             self.newsFeedTableView.reloadData()
         }
         let byLikes = UIAction(title: "sort by likes") { _ in
-            self.cellModel.sort(by: {$0.post.likes_count > $1.post.likes_count})
+            self.cellModel.sort(by: {$0.posts.likes_count > $1.posts.likes_count})
             self.newsFeedTableView.reloadData()
         }
         
@@ -121,10 +121,10 @@ extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = storyboard?.instantiateViewController(identifier: "DetailedInformationViewController") as? DetailedInformationViewController else { return }
-        let newsId = cellModel[indexPath.row].post.postId
+        let newsId = cellModel[indexPath.row].posts.postId
         downloadManager.requestDetailedNew(id: newsId) { (data, error) in
             guard let downloadedData = data else { return }
-            nextVC.detailedNews = data
+            nextVC.setupViewModels(downloadedData.post)
             self.networkManager.requestData(urlString: downloadedData.post.postImage) { (imageData, error) in
                 if let data = imageData {
                     nextVC.image = data
