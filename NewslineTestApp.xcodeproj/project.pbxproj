@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		932502EA2B60273700306AF6 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932502E92B60273700306AF6 /* NetworkError.swift */; };
 		933368832AB4568600AFC0C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368822AB4568600AFC0C9 /* AppDelegate.swift */; };
 		933368852AB4568600AFC0C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368842AB4568600AFC0C9 /* SceneDelegate.swift */; };
 		9333688A2AB4568600AFC0C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933368882AB4568600AFC0C9 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		932502E92B60273700306AF6 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		9333687F2AB4568600AFC0C9 /* NewslineTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewslineTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		933368822AB4568600AFC0C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		933368842AB4568600AFC0C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		932502E82B60271D00306AF6 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				932502E92B60273700306AF6 /* NetworkError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		933368762AB4568600AFC0C9 = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +105,9 @@
 		933368982AB4595B00AFC0C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				932502E82B60271D00306AF6 /* Errors */,
 				933368B02AB476F500AFC0C9 /* DataModels */,
-				933368AA2AB4757B00AFC0C9 /* NetworkManager.swift */,
-				933368AD2AB4766F00AFC0C9 /* NetworkFetchService.swift */,
+				93EC26322B5FE61800861FEA /* Services */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -126,6 +136,15 @@
 				933368B92AB4790800AFC0C9 /* DetailedNewsModel.swift */,
 			);
 			path = DataModels;
+			sourceTree = "<group>";
+		};
+		93EC26322B5FE61800861FEA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				933368AA2AB4757B00AFC0C9 /* NetworkManager.swift */,
+				933368AD2AB4766F00AFC0C9 /* NetworkFetchService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +227,7 @@
 				933368A52AB4628E00AFC0C9 /* NewsFeedTableViewCell.swift in Sources */,
 				9333689F2AB459C300AFC0C9 /* DetailedInformationViewController.swift in Sources */,
 				933368AE2AB4766F00AFC0C9 /* NetworkFetchService.swift in Sources */,
+				932502EA2B60273700306AF6 /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,10 +38,11 @@ class NewslineViewController: UIViewController {
     }
     
     private func requestData() {
-        downloadManager.requestAllNews { (data, error) in
-            if let posts = data?.posts {
-                self.cellModel = self.setupViewModels(posts)
-                self.newsFeedTableView.reloadData()
+        downloadManager.requestAllNews() { result in
+            switch result {
+            case .success( let answer): self.cellModel = self.setupViewModels(answer.posts); self.newsFeedTableView.reloadData()
+            case .failure(let networkError): print("FAILURE due to \(networkError.localizedDescription)")
+//            case .failure(let decodingError as DecodingError): print("ERROR Decoder \(decodingError)")
             }
         }
     }
