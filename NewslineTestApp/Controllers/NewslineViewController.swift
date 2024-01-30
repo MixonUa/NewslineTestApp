@@ -40,8 +40,8 @@ class NewslineViewController: UIViewController {
     private func requestData() {
         downloadManager.requestAllNews() { result in
             switch result {
-            case .success( let answer): self.cellModel = self.setupViewModels(answer.posts); self.newsFeedTableView.reloadData()
-            case .failure(let networkError): self.showAlert(title: "Something goes wrong!", message: "FAILURE due to \(networkError.localizedDescription)")
+            case .success(let answer): self.cellModel = self.setupViewModels(answer.posts); self.newsFeedTableView.reloadData()
+            case .failure(let error): self.showAlert(title: "Something goes wrong!", message: "FAILURE due to \(error.localizedDescription)")
 //            case .failure(let decodingError as DecodingError): print("ERROR Decoder \(decodingError)")
             }
         }
@@ -109,14 +109,16 @@ extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = storyboard?.instantiateViewController(identifier: "DetailedInformationViewController") as? DetailedInformationViewController else { return }
         let newsId = cellModel[indexPath.row].post.postId
-        downloadManager.requestDetailedNew(id: newsId) { (data, error) in
-            guard let downloadedData = data else { return }
-            nextVC.detailedNews = data
-            self.networkManager.requestData(urlString: downloadedData.post.postImage) { (imageData, error) in
-                if let data = imageData {
-                    nextVC.image = data
+        downloadManager.requestDetailedNew(id: newsId) { result in
+            switch result {
+            case .success(let answer): nextVC.detailedNews = answer;
+                self.networkManager.requestData(urlString: answer.post.postImage) { (imageData, error) in
+                    if let data = imageData {
+                        nextVC.image = data
+                    }
+                    self.navigationController?.pushViewController(nextVC, animated: true)
                 }
-                self.navigationController?.pushViewController(nextVC, animated: true)
+            case .failure(let error): self.showAlert(title: "Something goes wrong!", message: "FAILURE due to \(error.localizedDescription)")
             }
         }
     }
