@@ -8,7 +8,7 @@
 import UIKit
 
 struct PostCellViewModel {
-    let posts: Posts
+    let post: Posts
     var collapsed: Bool
     let buttonHandler: (Posts) -> Void
 }
@@ -38,18 +38,19 @@ class NewslineViewController: UIViewController {
     }
     
     private func requestData() {
-        downloadManager.requestAllNews { (data, error) in
-            if let posts = data?.posts {
-                self.cellModel = self.setupViewModels(posts)
-                self.newsFeedTableView.reloadData()
+        downloadManager.requestAllNews() { result in
+            switch result {
+            case .success(let answer): self.cellModel = self.setupViewModels(answer.posts); self.newsFeedTableView.reloadData()
+            case .failure(let error): self.showAlert(title: "Something goes wrong!", message: "FAILURE due to \(error.localizedDescription)")
+//            case .failure(let decodingError as DecodingError): print("ERROR Decoder \(decodingError)")
             }
         }
     }
     
     private func setupViewModels(_ posts: [Posts]) -> [PostCellViewModel] {
         posts.map { post in
-            PostCellViewModel(posts: post, collapsed: true, buttonHandler: { post in
-                if let index = self.cellModel.firstIndex(where: { $0.posts.postId == post.postId }) {
+            PostCellViewModel(post: post, collapsed: true, buttonHandler: { post in
+                if let index = self.cellModel.firstIndex(where: { $0.post.postId == post.postId }) {
                     var model = self.cellModel[index]
                     let current = model.collapsed
                     model.collapsed = !current
@@ -62,31 +63,17 @@ class NewslineViewController: UIViewController {
     }
 }
 
-extension Double {
-    func daysAgo() -> Int {
-        let calendar = Calendar.current
-        let today = Date()
-        let postDate = NSDate(timeIntervalSince1970: self)
-
-        let date1 = calendar.startOfDay(for: today)
-        let date2 = calendar.startOfDay(for: postDate as Date)
-
-        let components = calendar.dateComponents([.day], from: date2, to: date1)
-        return components.day!
-    }
-}
-
 // MARK: Settings
 
 extension NewslineViewController {
     
     private func setupTopMenu() {
         let byDate = UIAction(title: "sort by date") { _ in
-            self.cellModel.sort(by: {$0.posts.timeshamp > $1.posts.timeshamp})
+            self.cellModel.sort(by: {$0.post.timeshamp > $1.post.timeshamp})
             self.newsFeedTableView.reloadData()
         }
         let byLikes = UIAction(title: "sort by likes") { _ in
-            self.cellModel.sort(by: {$0.posts.likes_count > $1.posts.likes_count})
+            self.cellModel.sort(by: {$0.post.likes_count > $1.post.likes_count})
             self.newsFeedTableView.reloadData()
         }
         
@@ -121,15 +108,17 @@ extension NewslineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = storyboard?.instantiateViewController(identifier: "DetailedInformationViewController") as? DetailedInformationViewController else { return }
-        let newsId = cellModel[indexPath.row].posts.postId
-        downloadManager.requestDetailedNew(id: newsId) { (data, error) in
-            guard let downloadedData = data else { return }
-            nextVC.setupViewModels(downloadedData.post)
-            self.networkManager.requestData(urlString: downloadedData.post.postImage) { (imageData, error) in
-                if let data = imageData {
-                    nextVC.image = data
+        let newsId = cellModel[indexPath.row].post.postId
+        downloadManager.requestDetailedNew(id: newsId) { result in
+            switch result {
+            case .success(let answer): nextVC.detailedNews = answer;
+                self.networkManager.requestData(urlString: answer.post.postImage) { (imageData, error) in
+                    if let data = imageData {
+                        nextVC.image = data
+                    }
+                    self.navigationController?.pushViewController(nextVC, animated: true)
                 }
-                self.navigationController?.pushViewController(nextVC, animated: true)
+            case .failure(let error): self.showAlert(title: "Something goes wrong!", message: "FAILURE due to \(error.localizedDescription)")
             }
         }
     }
