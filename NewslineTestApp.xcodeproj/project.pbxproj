@@ -95,9 +95,8 @@
 		933368982AB4595B00AFC0C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				936F21402B692133009E9F98 /* Services */,
 				933368B02AB476F500AFC0C9 /* DataModels */,
-				933368AA2AB4757B00AFC0C9 /* NetworkManager.swift */,
-				933368AD2AB4766F00AFC0C9 /* NetworkFetchService.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -126,6 +125,15 @@
 				933368B92AB4790800AFC0C9 /* DetailedNewsModel.swift */,
 			);
 			path = DataModels;
+			sourceTree = "<group>";
+		};
+		936F21402B692133009E9F98 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				933368AA2AB4757B00AFC0C9 /* NetworkManager.swift */,
+				933368AD2AB4766F00AFC0C9 /* NetworkFetchService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
