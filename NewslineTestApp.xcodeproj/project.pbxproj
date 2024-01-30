@@ -22,6 +22,7 @@
 		933368B22AB4770200AFC0C9 /* NewsFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368B12AB4770200AFC0C9 /* NewsFeedModel.swift */; };
 		933368BA2AB4790800AFC0C9 /* DetailedNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368B92AB4790800AFC0C9 /* DetailedNewsModel.swift */; };
 		936DF9802B690C0300F2038B /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936DF97F2B690C0300F2038B /* UIViewController+Alert.swift */; };
+		936F213D2B691455009E9F98 /* Double+DaysAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936F213C2B691455009E9F98 /* Double+DaysAgo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		933368B12AB4770200AFC0C9 /* NewsFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedModel.swift; sourceTree = "<group>"; };
 		933368B92AB4790800AFC0C9 /* DetailedNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNewsModel.swift; sourceTree = "<group>"; };
 		936DF97F2B690C0300F2038B /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		936F213C2B691455009E9F98 /* Double+DaysAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+DaysAgo.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				936DF97F2B690C0300F2038B /* UIViewController+Alert.swift */,
+				936F213C2B691455009E9F98 /* Double+DaysAgo.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				9333689C2AB459AE00AFC0C9 /* NewslineViewController.swift in Sources */,
 				933368A52AB4628E00AFC0C9 /* NewsFeedTableViewCell.swift in Sources */,
 				9333689F2AB459C300AFC0C9 /* DetailedInformationViewController.swift in Sources */,
+				936F213D2B691455009E9F98 /* Double+DaysAgo.swift in Sources */,
 				933368AE2AB4766F00AFC0C9 /* NetworkFetchService.swift in Sources */,
 				932502EA2B60273700306AF6 /* NetworkError.swift in Sources */,
 			);
