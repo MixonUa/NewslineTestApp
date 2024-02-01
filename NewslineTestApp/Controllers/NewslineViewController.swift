@@ -7,12 +7,6 @@
 
 import UIKit
 
-struct PostCellViewModel {
-    let post: Posts
-    var collapsed: Bool
-    let buttonHandler: (Posts) -> Void
-}
-
 class NewslineViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     
@@ -42,7 +36,6 @@ class NewslineViewController: UIViewController {
             switch result {
             case .success(let answer): self.cellModel = self.setupViewModels(answer.posts); self.newsFeedTableView.reloadData()
             case .failure(let error): self.showAlert(title: "Something goes wrong!", message: "FAILURE due to \(error.localizedDescription)")
-//            case .failure(let decodingError as DecodingError): print("ERROR Decoder \(decodingError)")
             }
         }
     }
