@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		930C8F592B6BBFB400F162A0 /* Double+DaysAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930C8F582B6BBFB400F162A0 /* Double+DaysAgo.swift */; };
+		930C8F5D2B6BBFD100F162A0 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930C8F5C2B6BBFD100F162A0 /* UIViewController+Alert.swift */; };
 		933368832AB4568600AFC0C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368822AB4568600AFC0C9 /* AppDelegate.swift */; };
 		933368852AB4568600AFC0C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933368842AB4568600AFC0C9 /* SceneDelegate.swift */; };
 		9333688A2AB4568600AFC0C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933368882AB4568600AFC0C9 /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		930C8F582B6BBFB400F162A0 /* Double+DaysAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+DaysAgo.swift"; sourceTree = "<group>"; };
+		930C8F5C2B6BBFD100F162A0 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		9333687F2AB4568600AFC0C9 /* NewslineTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewslineTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		933368822AB4568600AFC0C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		933368842AB4568600AFC0C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		930C8F562B6BBF6600F162A0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				930C8F582B6BBFB400F162A0 /* Double+DaysAgo.swift */,
+				930C8F5C2B6BBFD100F162A0 /* UIViewController+Alert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		933368762AB4568600AFC0C9 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +88,7 @@
 				933368982AB4595B00AFC0C9 /* Models */,
 				933368992AB4596200AFC0C9 /* Views */,
 				933368972AB4594E00AFC0C9 /* Controllers */,
+				930C8F562B6BBF6600F162A0 /* Extensions */,
 				933368882AB4568600AFC0C9 /* Main.storyboard */,
 				9333688B2AB4568800AFC0C9 /* Assets.xcassets */,
 				9333688D2AB4568800AFC0C9 /* LaunchScreen.storyboard */,
@@ -210,6 +224,8 @@
 				933368B22AB4770200AFC0C9 /* NewsFeedModel.swift in Sources */,
 				933368AB2AB4757B00AFC0C9 /* NetworkManager.swift in Sources */,
 				933368BA2AB4790800AFC0C9 /* DetailedNewsModel.swift in Sources */,
+				930C8F592B6BBFB400F162A0 /* Double+DaysAgo.swift in Sources */,
+				930C8F5D2B6BBFD100F162A0 /* UIViewController+Alert.swift in Sources */,
 				933368832AB4568600AFC0C9 /* AppDelegate.swift in Sources */,
 				933368852AB4568600AFC0C9 /* SceneDelegate.swift in Sources */,
 				9333689C2AB459AE00AFC0C9 /* NewslineViewController.swift in Sources */,
