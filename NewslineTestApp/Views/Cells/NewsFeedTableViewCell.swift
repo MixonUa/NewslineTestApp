@@ -23,10 +23,10 @@ class NewsFeedTableViewCell: UITableViewCell {
     // MARK: Cell
     func configure(with model: PostCellViewModel) {
         self.model = model
-        titleLabel.text = model.posts.title
-        informationLabel.text = model.posts.preview_text
-        likesLabel.text = "\u{2764}" + String(model.posts.likes_count)
-        daysAgoLabel.text = String(model.posts.timeshamp.daysAgo()) + " day" + " ago"
+        titleLabel.text = model.post.title
+        informationLabel.text = model.post.preview_text
+        likesLabel.text = "\u{2764}" + String(model.post.likes_count)
+        daysAgoLabel.text = String(model.post.timeshamp.daysAgo()) + " day" + " ago"
         if informationLabel.calculateMaxLines() <= 2 {
             textModifyButton.isHidden = true
         } else {
@@ -43,7 +43,7 @@ class NewsFeedTableViewCell: UITableViewCell {
     
     @IBAction func textModifyButtonPressed(_ sender: Any) {
         guard let model = model else { return }
-        model.buttonHandler(model.posts)
+        model.buttonHandler(model.post)
     }
 }
 

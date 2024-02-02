@@ -15,7 +15,7 @@ class NetworkFetchService {
     }
     
     func requestAllNews(completion: @escaping (Result<NewsFeedModel, Error>) -> Void) {
-        let newsURL = "https://raw.githubusercontent.com/anton-natife/jsons/master/api/main.json"
+        let newsURL = "https://raw.githubusercontent.com/MixonUa/JSON-NewslineTestApp/main/main.json"
         networkDataProvider.requestData(urlString: newsURL) { (data, error) in
             if let error = error { completion(.failure(NetworkError.serverError(error: error))); return }
             if let data = data {
@@ -34,7 +34,7 @@ class NetworkFetchService {
     }
     
     func requestDetailedNew(id: Int, completion: @escaping (Result<DetailedNewsModel, Error>) -> Void) {
-        let newsURL = "https://raw.githubusercontent.com/anton-natife/jsons/master/api/posts/\(id).json"
+        let newsURL = "https://raw.githubusercontent.com/MixonUa/JSON-NewslineTestApp/main/posts/\(id).json"
         networkDataProvider.requestData(urlString: newsURL) { (data, error) in
             if let error = error { completion(.failure(NetworkError.serverError(error: error))); return }
             if let data = data {
